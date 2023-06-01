@@ -12,6 +12,9 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=secret
     volumes:
       - db-mongo-ecomm:/data:db
+      - type: bind
+        source: ./mongo
+        target: /mongo-scripts
     ports:
       - "27017:27017"
 
