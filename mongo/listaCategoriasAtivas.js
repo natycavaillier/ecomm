@@ -1,4 +1,7 @@
 use("ecomm");
-var categories = db.categories.find({"status": "ATIVA"});
+
+const filter = { "status": "ATIVA" };
+
+var categories = db.categories.find(filter);
 
 console.log(categories);
