@@ -1,0 +1,58 @@
+{
+    "title": "Registro de produto",
+    "description": "Este documento registra os detalhes de um produto",
+    "type": "object",
+    "required": [
+        "_id",
+        "nome",
+        "descricao",
+        "slug",
+        "preco",
+        "estoque",
+        "categoria"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "bsonType": "objectId",
+            "description": "Id do produto"
+        },
+        "nome": {
+            "type": "string",
+            "description": "Nome do produto",
+            "minLength": 5
+        },
+        "descricao": {
+            "type": "string",
+            "description": "Descricao do produto",
+            "minLength": 10
+        },
+        "slug": {
+            "type": "string",
+            "description": "Slug do produto",
+            "minLength": 5
+        },
+        "preco": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Preco do produto"
+        },
+        "estoque": {
+            "type": "number",
+            "multipleOf": 1,
+            "minimum": 0,
+            "description": "Estoque do produto"
+        },
+        "categoria": {
+            "enum": [
+                "AUTOMOTIVA",
+                "CELULARES",
+                "INFORMÁTICA",
+                "LIVROS",
+                "MÓVEIS"
+            ],
+            "type": "string",
+            "description": "Categoria do produto"
+        }
+    }
+}
