@@ -1,0 +1,30 @@
+{
+    "title": "Registro de categoria",
+    "description": "Este documento registra os detalhes de uma categoria",
+    "type": "object",
+    "required": [
+        "_id",
+        "nome",
+        "status"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "_id": {
+            "bsonType": "objectId",
+            "description": "Id da categoria"
+        },
+        "nome": {
+            "type": "string",
+            "description": "Nome da categoria",
+            "minLength": 3
+        },
+        "status": {
+            "enum": [
+                "ATIVA",
+                "INATIVA"
+            ],
+            "type": "string",
+            "description": "Status da categoria"
+        }
+    }
+}
