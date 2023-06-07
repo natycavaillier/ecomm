@@ -94,7 +94,7 @@ let result = db.createCollection(
                         bsonType: "array",
                         description: "Lista de itens do pedido",
                         minItems: 1,
-                        items: {
+                        properties: {
                             bsonType: "object",
                             description: "Item do pedido",
                             required: ["productId", "quantidade", "precoUnitario"],
