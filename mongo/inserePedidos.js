@@ -11,7 +11,7 @@ const ordersToBeInserted = [
         enderecoEntrega: {
             bairro: "Centro",
             rua: "Avenida Brigadeiro Mário Epingaus",
-            numero: "s/n",
+            numero: "S/N",
             cep: "42700970",
             cidade: "Lauro de Freitas",
             uf: "BA"
