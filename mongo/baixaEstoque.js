@@ -23,7 +23,7 @@ const orderToBeInserted = {
     itens: [itemBeingPurchased]
 };
 
-const filter = { _id: new ObjectId("6479fbdc9bfcaaa80501b467"), estoque: { $gte: itemBeingPurchased.quantidade } };
+const filter = { _id: itemBeingPurchased.productId, estoque: { $gte: itemBeingPurchased.quantidade } };
 const updateStock = { $inc: { estoque: -(itemBeingPurchased.quantidade) } };
 
 
