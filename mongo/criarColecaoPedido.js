@@ -36,7 +36,8 @@ let result = db.createCollection(
                             },
                             nomeCliente: {
                                 bsonType: "string",
-                                description: "Nome do cliente relacionado ao pedido"
+                                description: "Nome do cliente relacionado ao pedido",
+                                minLength: 5
                             }
                         }
                     },
@@ -94,7 +95,7 @@ let result = db.createCollection(
                         bsonType: "array",
                         description: "Lista de itens do pedido",
                         minItems: 1,
-                        properties: {
+                        items: {
                             bsonType: "object",
                             description: "Item do pedido",
                             required: ["productId", "quantidade", "precoUnitario"],
