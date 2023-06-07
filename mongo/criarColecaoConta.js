@@ -21,8 +21,8 @@ let result = db.createCollection(
                 additionalProperties: false,
                 properties: {
                     _id: {
-                        "bsonType": "objectId",
-                        "description": "Id da conta de usuário"
+                        bsonType: "objectId",
+                        description: "Id da conta de usuário"
                     },
                     nome: {
                         bsonType: "string",
