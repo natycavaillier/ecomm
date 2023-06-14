@@ -1,0 +1,59 @@
+{
+    "$jsonSchema": {
+        "title": "Registro de produto",
+        "description": "Este documento registra os detalhes de um produto",
+        "bsonType": "object",
+        "required": [
+            "_id",
+            "nome",
+            "descricao",
+            "slug",
+            "preco",
+            "estoque",
+            "categoria"
+        ],
+        "additionalProperties": false,
+        "properties": {
+            "_id": {
+                "bsonType": "objectId",
+                "description": "Id do produto"
+            },
+            "nome": {
+                "bsonType": "string",
+                "description": "Nome do produto",
+                "minLength": 5
+            },
+            "descricao": {
+                "bsonType": "string",
+                "description": "Descricao do produto",
+                "minLength": 10
+            },
+            "slug": {
+                "bsonType": "string",
+                "description": "Slug do produto",
+                "minLength": 5
+            },
+            "preco": {
+                "bsonType": "decimal",
+                "minimum": 0.00,
+                "description": "Preco do produto"
+            },
+            "estoque": {
+                "bsonType": "int",
+                "minimum": 0,
+                "description": "Estoque do produto"
+            },
+            "categoria": {
+                "enum": [
+                    "AUTOMOTIVA",
+                    "CELULARES",
+                    "INFORMÁTICA",
+                    "LIVROS",
+                    "MÓVEIS"
+                ],
+                "bsonType": "string",
+                "description": "Categoria do produto"
+            }
+        }
+    }
+}
