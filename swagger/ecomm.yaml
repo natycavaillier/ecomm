@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: API de categorias
+  description: API para controlar categorias
+  version: 0.0.1
+servers:
+  - url: http://api/
+    description: API de Categorias
+paths:
+  /categories:
+    get:
+      summary: Recupera todas as categorias
+      responses: 
+        200:
+          description: Sucesso
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Categories'
+        404:
+          description: Nenhuma categoria encontrada
+          content:
+            application/json:
+              example:
+                "Not Found"
+  /categories/{id}:
+    parameters: 
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+    get:
+      summary: Recupera uma categoria pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Category'
+        404:
+          description: Categoria não encontrada
+          content:
+            application/json:
+              example:
+                "Not Found"
+components:
+  schemas: 
+    Category:
+      type: object
+      properties: 
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    Categories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
