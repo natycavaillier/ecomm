@@ -1,7 +1,9 @@
+const categoryBaseEndpoint = "http://localhost:3000/categories";
+
 export class CategoryService {
 
     static async findCategories() {
-        const response = await fetch('http://localhost:3000/categories');
+        const response = await fetch(`${categoryBaseEndpoint}`);
 
 
         console.log(`Response status: ${response.status}`);
@@ -12,8 +14,7 @@ export class CategoryService {
     }
 
     static async findCategoryById(id) {
-
-        const response = await fetch(`http://localhost:3000/categories/${id}`);
+        const response = await fetch(`${categoryBaseEndpoint}/${id}`);
 
 
         console.log(`Response status: ${response.status}`);
@@ -24,7 +25,7 @@ export class CategoryService {
     }
 
     static async createCategory(category) {
-        const response = await fetch(`http://localhost:3000/categories`, {
+        const response = await fetch(`${categoryBaseEndpoint}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -39,18 +40,18 @@ export class CategoryService {
         return response.json();
     }
 
-    static async createCategory(category) {
-        const response = await fetch(`http://localhost:3000/categories`, {
-            method: "POST",
+    static async updateCategory(id, newCategory) {
+        const response = await fetch(`${categoryBaseEndpoint}/${id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(category)
+            body: JSON.stringify(newCategory)
         });
 
         console.log(`Response status: ${response.status}`);
 
-        if (response.status === 400) throw new Error('Erro ao criar categoria');
+        if (response.status === 404) throw new Error('Categoria não encontrada');
 
         return response.json();
     }
