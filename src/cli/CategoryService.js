@@ -55,4 +55,19 @@ export class CategoryService {
 
         return response.json();
     }
+
+    static async deleteCategory(id) {
+        const response = await fetch(`${categoryBaseEndpoint}/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        console.log(`Response status: ${response.status}`);
+
+        if (response.status === 404) throw new Error('Categoria não encontrada');
+
+        return response.json();
+    }
 }

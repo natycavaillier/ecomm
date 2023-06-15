@@ -39,6 +39,12 @@ async function performRequestedCommand(commandLineArguments, requestedCommand) {
 
             return await CategoryService.updateCategory(id, category);
 
+        case "--excluirCategoria":
+            // node ./src/cli/cli.js --excluirCategoria 9
+            var id = commandLineArguments[3];
+
+            return await CategoryService.deleteCategory(id);
+
         default:
             throw new Error("Comando inválido");
     }
