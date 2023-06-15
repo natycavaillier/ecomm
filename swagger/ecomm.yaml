@@ -352,6 +352,48 @@ paths:
               example:
                 "Not Found"
                 
+  /orders/{id}:
+    parameters: 
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+    get:
+      tags:
+        - Pedidos
+      summary: Recupera um pedido pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Order'
+        404:
+          description: Pedido não encontrado
+          content:
+            application/json:
+              example:
+                "Not Found"
+  /orders:
+    post: 
+      tags:
+        - Pedidos
+      summary: Cria novo pedido
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        201:
+          description: Sucesso ao criar pedido
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+                
 components:
   schemas: 
     Category:
@@ -435,3 +477,33 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Account'
+        
+    Items:
+      type: array
+      items:
+        properties:
+          productId:
+            type: integer
+          quantidade:
+            type: integer
+          desconto:
+            type: number
+          precoUnitario:
+            type: number
+        
+    Order:
+      type: object
+      properties: 
+        id:
+          type: integer
+        accountId:
+          type: string
+        enderecoEntrega:
+          $ref: '#/components/schemas/Address'
+        itens:
+          $ref: '#/components/schemas/Items'
+          
+    Orders:
+      type: array
+      items:
+        $ref: '#/components/schemas/Order'
