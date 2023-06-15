@@ -53,7 +53,7 @@ paths:
     post: 
       tags:
         - Categorias com acesso de admin
-      summary: Cria nova Categoria
+      summary: Cria nova categoria
       requestBody:
         content: 
           application/json:
@@ -79,12 +79,12 @@ paths:
     put:
       tags:
         - Categorias com acesso de admin
-      summary: Atualiza uma Categoria
+      summary: Atualiza uma categoria
       requestBody:
         content: 
           application/json:
             schema:
-              $ref: '#/components/schemas/CategoryWithoutId'
+              $ref: '#/components/schemas/Category'
       responses:
         200:
           description: Sucesso ao atualizar categoria
@@ -125,7 +125,7 @@ paths:
           schema:
             type: integer
           required: true
-      summary: Ativa uma Categoria
+      summary: Ativa uma categoria
       description: Atualiza o status da categoria para 'ATIVA'
       responses:
         200:
@@ -140,6 +140,116 @@ paths:
             application/json:
               example:
                 "Not Found"
+                
+  /products:
+    get:
+      tags:
+        - Produtos
+      summary: Recupera todos os produtos
+      responses: 
+        200:
+          description: Sucesso
+          content: 
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Products'
+        404:
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example:
+                "Not Found"
+  /products/{id}:
+    parameters: 
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+    get:
+      tags:
+        - Produtos
+      summary: Recupera um produto pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example:
+                "Not Found"
+  /admin/products:
+    post: 
+      tags:
+        - Produtos com acesso de admin
+      summary: Cria novo produto
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        201:
+          description: Sucesso ao criar produto
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /admin/products/{id}:
+    parameters: 
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true               
+    put:
+      tags:
+        - Produtos com acesso de admin
+      summary: Atualiza um produto
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        200:
+          description: Sucesso ao atualizar produto
+          content: 
+            application/json:
+              example:
+                "Categoria atualizada com sucesso"
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example:
+                "Not Found"
+    delete:
+      tags:
+        - Produtos com acesso de admin
+      summary: Exclui um produto pelo ID
+      responses:
+        200:
+          description: Sucesso ao deletar produto
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example:
+                "Not Found"
+                
 components:
   schemas: 
     Category:
@@ -151,14 +261,29 @@ components:
           type: string
         status:
           type: string
-    CategoryWithoutId:
-      type: object
-      properties:
-        nome:
-          type: string
-        status:
-          type: string
     Categories:
       type: array
       items:
         $ref: '#/components/schemas/Category'
+        
+    Product:
+      type: object
+      properties: 
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        estoque:
+          type: integer
+        categoria:
+          type: integer
+    Products:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
