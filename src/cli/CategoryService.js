@@ -1,73 +1,67 @@
-const categoryBaseEndpoint = "http://localhost:3000/categories";
+const categoryBaseEndpoint = 'http://localhost:3000/categories';
 
-export class CategoryService {
+export default class CategoryService {
+  static async findCategories() {
+    const response = await fetch(`${categoryBaseEndpoint}`);
 
-    static async findCategories() {
-        const response = await fetch(`${categoryBaseEndpoint}`);
+    console.log(`Response status: ${response.status}`);
 
+    if (response.status === 404) throw new Error('Nenhum categoria foi encontrada');
 
-        console.log(`Response status: ${response.status}`);
+    return response.json();
+  }
 
-        if (response.status === 404) throw new Error('Nenhum categoria foi encontrada');
+  static async findCategoryById(id) {
+    const response = await fetch(`${categoryBaseEndpoint}/${id}`);
 
-        return await response.json();
-    }
+    console.log(`Response status: ${response.status}`);
 
-    static async findCategoryById(id) {
-        const response = await fetch(`${categoryBaseEndpoint}/${id}`);
+    if (response.status === 404) throw new Error('Categoria não encontrada');
 
+    return response.json();
+  }
 
-        console.log(`Response status: ${response.status}`);
+  static async createCategory(category) {
+    const response = await fetch(`${categoryBaseEndpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(category),
+    });
 
-        if (response.status === 404) throw new Error('Categoria não encontrada');
+    console.log(`Response status: ${response.status}`);
 
-        return await response.json();
-    }
+    if (response.status === 400) throw new Error('Erro ao criar categoria');
 
-    static async createCategory(category) {
-        const response = await fetch(`${categoryBaseEndpoint}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(category)
-        });
+    return response.json();
+  }
 
-        console.log(`Response status: ${response.status}`);
+  static async updateCategory(id, newCategory) {
+    const response = await fetch(`${categoryBaseEndpoint}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newCategory),
+    });
 
-        if (response.status === 400) throw new Error('Erro ao criar categoria');
+    console.log(`Response status: ${response.status}`);
 
-        return await response.json();
-    }
+    if (response.status === 404) throw new Error('Categoria não encontrada');
 
-    static async updateCategory(id, newCategory) {
-        const response = await fetch(`${categoryBaseEndpoint}/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newCategory)
-        });
+    return response.json();
+  }
 
-        console.log(`Response status: ${response.status}`);
+  static async deleteCategory(id) {
+    const response = await fetch(`${categoryBaseEndpoint}/${id}`, {
+      method: 'DELETE'
+    });
 
-        if (response.status === 404) throw new Error('Categoria não encontrada');
+    console.log(`Response status: ${response.status}`);
 
-        return await response.json();
-    }
+    if (response.status === 404) throw new Error('Categoria não encontrada');
 
-    static async deleteCategory(id) {
-        const response = await fetch(`${categoryBaseEndpoint}/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        });
-
-        console.log(`Response status: ${response.status}`);
-
-        if (response.status === 404) throw new Error('Categoria não encontrada');
-
-        return await response.json();
-    }
+    return response.json();
+  }
 }

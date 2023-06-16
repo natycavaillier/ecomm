@@ -5,11 +5,16 @@
     "main": "src/main.js",
     "type": "module",
     "scripts": {
-      "start": "node src/main.js",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "cli:listarCategorias": "node ./src/cli/cli.js --listarCategorias"
+        "start": "node src/main.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint ./src/**/*.js",
+        "lint:fix": "eslint ./src/**/*.js --fix"
     },
     "author": "",
-    "license": "MIT"
-  }
-
+    "license": "MIT",
+    "devDependencies": {
+        "eslint": "^8.42.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.27.5"
+    }
+}
