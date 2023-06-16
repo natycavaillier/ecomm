@@ -55,7 +55,7 @@ export default class CategoryService {
 
   static async deleteCategory(id) {
     const response = await fetch(`${categoryBaseEndpoint}/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     });
 
     console.log(`Response status: ${response.status}`);
