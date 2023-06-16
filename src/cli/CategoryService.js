@@ -10,7 +10,7 @@ export class CategoryService {
 
         if (response.status === 404) throw new Error('Nenhum categoria foi encontrada');
 
-        return response.json();
+        return await response.json();
     }
 
     static async findCategoryById(id) {
@@ -21,7 +21,7 @@ export class CategoryService {
 
         if (response.status === 404) throw new Error('Categoria não encontrada');
 
-        return response.json();
+        return await response.json();
     }
 
     static async createCategory(category) {
@@ -37,7 +37,7 @@ export class CategoryService {
 
         if (response.status === 400) throw new Error('Erro ao criar categoria');
 
-        return response.json();
+        return await response.json();
     }
 
     static async updateCategory(id, newCategory) {
@@ -53,7 +53,7 @@ export class CategoryService {
 
         if (response.status === 404) throw new Error('Categoria não encontrada');
 
-        return response.json();
+        return await response.json();
     }
 
     static async deleteCategory(id) {
@@ -68,6 +68,6 @@ export class CategoryService {
 
         if (response.status === 404) throw new Error('Categoria não encontrada');
 
-        return response.json();
+        return await response.json();
     }
 }
