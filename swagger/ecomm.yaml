@@ -142,6 +142,27 @@ paths:
                 "Not Found"
                 
   /products:
+    parameters:
+        - in: query
+          name: minimumPrice
+          description: O preço mínimo a ser filtrado
+          schema:
+            type: number
+        - in: query
+          name: maximumPrice
+          description: O preço máximo a ser filtrado
+          schema:
+            type: number
+        - in: query
+          name: categoryId
+          description: O id da categoria a ser filtrada
+          schema:
+            type: string
+        - in: query
+          name: minimumStock
+          description: O estoque mínimo dos produtos a serem filtrados
+          schema:
+            type: integer
     get:
       tags:
         - Produtos
