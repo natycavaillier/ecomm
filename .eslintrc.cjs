@@ -15,5 +15,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'linebreak-style': 'off',
     'new-cap': 'off',
+    'no-underscore-dangle': 'off',
   },
 };
