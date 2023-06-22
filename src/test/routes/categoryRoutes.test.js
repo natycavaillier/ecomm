@@ -1,17 +1,17 @@
 import {
-  afterEach, beforeEach, describe, expect, it,
+  afterAll, beforeAll, describe, expect, it,
 } from '@jest/globals';
 import request from 'supertest';
 import app from '../../app.js';
 
 let server;
 
-beforeEach(() => {
+beforeAll(() => {
   const port = 8080;
   server = app.listen(port);
 });
 
-afterEach(() => {
+afterAll(() => {
   server.close();
 });
 
@@ -46,6 +46,26 @@ describe('POST em /admin/categories', () => {
     await request(app)
       .post('/admin/categories')
       .send({})
+      .expect(400);
+  });
+
+  it('Deve não adicionar nada ao passar o nome com menos de 3 caracteres', async () => {
+    await request(app)
+      .post('/admin/categories')
+      .send({
+        nome: 'EL',
+        status: 'ATIVA',
+      })
+      .expect(400);
+  });
+
+  it('Deve não adicionar nada ao passar o nome que inicie com numeros', async () => {
+    await request(app)
+      .post('/admin/categories')
+      .send({
+        nome: '1EL',
+        status: 'ATIVA',
+      })
       .expect(400);
   });
 });
