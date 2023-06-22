@@ -74,8 +74,6 @@ class CategoryController {
       return res.status(404).send({ message: 'Categoria não encontrada' });
     }
   }
-
-  // ativar categoria
 }
 
 export default CategoryController;
