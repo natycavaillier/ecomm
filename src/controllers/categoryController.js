@@ -19,8 +19,6 @@ class CategoryController {
 
       const category = await Category.findById(id).exec();
 
-      if (!category) throw new Error('Not found');
-
       return res.status(200).json(category);
     } catch (err) {
       return res.status(404).send({ message: 'Categoria não encontrada' });
