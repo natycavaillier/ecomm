@@ -3,11 +3,11 @@ import Category from '../models/Category.js';
 class CategoryController {
   static async findCategories(req, res) {
     try {
-      const categoriesDocuments = await Category.find();
+      const foundCategories = await Category.find();
 
-      if (categoriesDocuments.length === 0) throw new Error('Nenhuma categoria encontrada');
+      if (foundCategories.length === 0) throw new Error('Nenhuma categoria encontrada');
 
-      return res.status(200).json(categoriesDocuments);
+      return res.status(200).json(foundCategories);
     } catch (err) {
       return res.status(404).send({ message: err.message });
     }
@@ -17,9 +17,9 @@ class CategoryController {
     try {
       const id = req.params.id;
 
-      const category = await Category.findById(id).exec();
+      const foundCategory = await Category.findById(id).exec();
 
-      return res.status(200).json(category);
+      return res.status(200).json(foundCategory);
     } catch (err) {
       return res.status(404).send({ message: 'Categoria não encontrada' });
     }
@@ -39,9 +39,9 @@ class CategoryController {
   static async updateCategory(req, res) {
     try {
       const id = req.params.id;
-      const newCategory = req.body;
+      const newCategoryData = req.body;
 
-      await Category.findByIdAndUpdate({ _id: id }, newCategory);
+      await Category.findByIdAndUpdate({ _id: id }, newCategoryData);
 
       return res.status(200).send({ message: 'Categoria atualizada com sucesso' });
     } catch (err) {
