@@ -20,6 +20,18 @@ class CategoryController {
     // });
   }
 
+  static async findCategoryById(req, res) {
+    try {
+      const id = req.params.id;
+
+      const category = await categories.findById(id).exec();
+
+      return res.status(200).json(category);
+    } catch (err) {
+      return res.status(404).send({ message: 'Categoria não encontrada' });
+    }
+  }
+
   static async createCategory(req, res) {
     try {
       const categoryToBeCreated = req.body;
