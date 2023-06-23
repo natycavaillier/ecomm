@@ -6,8 +6,6 @@ services:
     container_name: ecomm
     depends_on:
       - mongo-ecomm
-    links:
-      - mongo-ecomm
     environment:
       - MONGO_HOST=mongo-ecomm
     ports:
