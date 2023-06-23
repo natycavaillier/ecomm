@@ -1,5 +1,5 @@
-import categoryRoutes from './categoryRoutes.js';
 import productRoutes from './productRoutes.js';
+import categoryRoutes from './categoryRoutes.js';
 
 const routes = (app) => {
   app.use(
