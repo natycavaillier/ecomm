@@ -24,6 +24,43 @@ class ProductController {
       return res.status(404).send({ message: 'Produto não encontrado' });
     }
   }
+
+  static async createProduct(req, res) {
+    try {
+      const productToBeCreated = req.body;
+
+      const createdProduct = await Product.create(productToBeCreated);
+
+      return res.status(201).json(createdProduct);
+    } catch (err) {
+      return res.status(400).send({ message: `${err.message} - Falha ao cadastrar produto` });
+    }
+  }
+
+  static async updateProduct(req, res) {
+    try {
+      const id = req.params.id;
+      const newProductData = req.body;
+
+      await Product.findByIdAndUpdate({ _id: id }, newProductData);
+
+      return res.status(200).send({ message: 'Produto atualizado com sucesso' });
+    } catch (err) {
+      return res.status(404).send({ message: 'Produto não encontrado' });
+    }
+  }
+
+  static async deleteProduct(req, res) {
+    try {
+      const id = req.params.id;
+
+      const deletedProduct = await Product.findByIdAndDelete(id);
+
+      return res.status(200).json(deletedProduct);
+    } catch (err) {
+      return res.status(404).send({ message: 'Produto não encontrado' });
+    }
+  }
 }
 
 export default ProductController;
