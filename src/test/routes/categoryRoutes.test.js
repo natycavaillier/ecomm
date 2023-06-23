@@ -5,6 +5,7 @@ import request from 'supertest';
 import app from '../../app.js';
 
 let server;
+let createdCategoryId;
 
 beforeAll(() => {
   const port = 8080;
@@ -26,8 +27,6 @@ describe('GET em /categories', () => {
     expect(response.body[0]).toHaveProperty('nome');
   });
 });
-
-let createdCategoryId;
 
 describe('POST em /admin/categories', () => {
   it('Deve adicionar uma nova categoria', async () => {
@@ -74,6 +73,23 @@ describe('GET em /categories/id', () => {
   it('Deve retornar a categoria equivalente', async () => {
     await request(app)
       .get(`/categories/${createdCategoryId}`)
+      .expect(200);
+  });
+});
+
+describe('PUT em /admin/categories/id', () => {
+  it('Deve alterar o campo nome', async () => {
+    await request(app)
+      .put(`/admin/categories/${createdCategoryId}`)
+      .send({ nome: 'ALIMENTOS' })
+      .expect(200);
+  });
+});
+
+describe('DELETE em /admin/categories/id', () => {
+  it('Deletar o recurso adicionado', async () => {
+    await request(app)
+      .delete(`/admin/categories/${createdCategoryId}`)
       .expect(200);
   });
 });
