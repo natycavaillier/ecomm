@@ -4,7 +4,7 @@ info:
   description: API para controlar categorias
   version: 0.0.1
 servers:
-  - url: http://api/
+  - url: http://localhost:3000/
     description: API de Categorias
 paths:
   /categories:
@@ -30,7 +30,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: integer
+            type: string
           required: true
     get:
       tags:
@@ -74,7 +74,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: integer
+            type: string
           required: true               
     put:
       tags:
@@ -123,7 +123,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: integer
+            type: string
           required: true
       summary: Ativa uma categoria
       description: Atualiza o status da categoria para 'ATIVA'
@@ -185,7 +185,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: integer
+            type: string
           required: true
     get:
       tags:
@@ -226,7 +226,7 @@ paths:
         - name: id
           in: path
           schema:
-            type: integer
+            type: string
           required: true               
     put:
       tags:

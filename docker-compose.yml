@@ -4,6 +4,12 @@ services:
     build: .
     image: natycavaillier/ecomm:1.0
     container_name: ecomm
+    depends_on:
+      - mongo-ecomm
+    environment:
+      - MONGO_HOST=mongo-ecomm
+    ports:
+      - "3000:3000"
   mongo-ecomm:
     image: mongo
     container_name: mongo-ecomm
@@ -20,4 +26,3 @@ services:
 
 volumes:
   db-mongo-ecomm:
-  
